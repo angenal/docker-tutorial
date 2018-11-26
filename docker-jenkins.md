@@ -13,7 +13,6 @@ Jenkins 是一款能提高效率的软件，它能帮你把软件开发过程形
 
 
 # **[1.安装 Jenkins](https://jenkins.io/doc/pipeline/tour/getting-started/)**
-    [设置Slave、创建Pipeline](https://www.jianshu.com/p/b524b151d35f)
 
 ~~~
 # 以CentOS为例
@@ -87,3 +86,6 @@ $ sudo grep jenkins /etc/sudoers
 jenkins   ALL=(ALL)   NOPASSWD: ALL
 
 ~~~
+
+# **[2.设置Slave、创建Pipeline](https://www.jianshu.com/p/b524b151d35f)**
+
