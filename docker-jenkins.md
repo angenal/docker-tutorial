@@ -116,5 +116,5 @@ jenkins   ALL=(ALL)   NOPASSWD: ALL
       4. 设置完毕后，一旦你的git仓库收到新的提交，就会触发这个pipeline的运行
 ~~~
 
-# **[3.NET Core Jenkins Docker 实现一键化部署](https://mp.weixin.qq.com/s?__biz=MzAxMTMxMDQ3Mw==&mid=2660103306&idx=1&sn=01f8743eceb9092590b363c6ab6f4fac&chksm=803a506cb74dd97a7605503cad5c2cf049eb402f845998b39dd7ba13043a78021fd5db015082&mpshare=1&scene=23&srcid=11269lOP7TG0BhlzfkfHO1XU)**
+# **[3.NET Core Jenkins Docker 实现一键化部署](https://www.cnblogs.com/rstar/p/9983438.html)**
 
