@@ -87,9 +87,34 @@ jenkins   ALL=(ALL)   NOPASSWD: ALL
 
 ~~~
 
-# **[2. 设置Slave、创建Pipeline](https://www.jianshu.com/p/b524b151d35f)**
+# **[2.设置Slave、创建Pipeline](https://www.jianshu.com/p/b524b151d35f)**
 
-  
+~~~
+# 设置Slave
+    打开Jenkins页面http://hostname:8080，进入管理页面 Manage Jenkins，点击 New Node
+    配置Node，Labels是环境设置，例如开发环境，测试环境，编译环境等，后续可以根据Lables值，指定具体的任务在某个环境中执行
+    设置Master到Node的授信方式 Jenkins Credentials Provider: Jenkins 添加成功后，可以在控制台看到新增的Node
+# 创建Pipeline
+    基本环境搭建好后配置工作流，在Jenkins中被称为pipeline，定义的内容放在Jenkinsfile文件中，并将文件放在git仓库的根目录
+    大致的流程如下：
+      1. 用户将代码提交到git
+      2. Jenkins从git拉取最新代码
+      3. 读取根目录下的Jenkinsfile文件，并依次执行文件中定义的任务
+    Jenkinsfile模板：
+      agent - 指定在哪台机器上执行任务，还记得上面配置Node时候填的Label吗，如果这两个label匹配得上，就在该Node中执行
+      stage - 组成工作流的大的步骤，这些步骤是串行的，例如build，test，deploy等
+      steps - 描述stage中的小步骤，同一个stage中的steps可以并行
+      sh    - 执行shell命令
+      input - 需要你手动点击确定，Pipeline才会进入后续环节，常用于部署环节，因为很多时候部署都需要人为的进行一些确认
+      post  - 所有pipeline执行完成后，会进入post环节，该环节一般做一些清理工作，同时还可以判断pipeline的执行状态
+    Jenkins-web页面，添加pipeline：
+      1. 每次git-commit时自动执行pipeline，有两种方法：
+          一种是让Jenkins对git进行轮询，每分钟检查git仓库有没有更新 √ Poll SCM -> Schedule设置 -> √ Ignore post-commit hooks
+          一种是使用git提供的hook，git 一旦提交，便会触发hook中的脚本，让脚本给Jenkins发送执行pipeline的指令，这种方式更优雅
+      2. 设置git的地址，其中的授信设置，和上面说的Master到Node的授信设置一致Credentials
+      3. Script Path 默认填写 Jenkinsfile 指repo下的Jenkinsfile文件
+      4. 设置完毕后，一旦你的git仓库收到新的提交，就会触发这个pipeline的运行
+~~~
 
-# **[3. ASP.NET Core Jenkins Docker 实现一键化部署](https://mp.weixin.qq.com/s?__biz=MzAxMTMxMDQ3Mw==&mid=2660103306&idx=1&sn=01f8743eceb9092590b363c6ab6f4fac&chksm=803a506cb74dd97a7605503cad5c2cf049eb402f845998b39dd7ba13043a78021fd5db015082&mpshare=1&scene=23&srcid=11269lOP7TG0BhlzfkfHO1XU#rd)
+# **[3.NET Core Jenkins Docker 实现一键化部署](https://mp.weixin.qq.com/s?__biz=MzAxMTMxMDQ3Mw==&mid=2660103306&idx=1&sn=01f8743eceb9092590b363c6ab6f4fac&chksm=803a506cb74dd97a7605503cad5c2cf049eb402f845998b39dd7ba13043a78021fd5db015082&mpshare=1&scene=23&srcid=11269lOP7TG0BhlzfkfHO1XU)**
 
